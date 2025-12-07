@@ -7,7 +7,7 @@
   "theme_color": "#2f6fdb",
   "icons": [
     {
-      "src": "assets/bucket.png",
+      "src": "bucket.png",
       "sizes": "128x128",
       "type": "image/png"
     }
