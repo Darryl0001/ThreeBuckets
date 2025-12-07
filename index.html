@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Money Tracker — Mobile</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2f6fdb">
+
+</head>
+<body>
+  
+  
+  <header class="header">
+    <div class="logo">
+      ThreeBuckets
+    </div>
+  </header>
+
+  <main class="container">
+   
+        <!-- Savings card -->
+    <section class="card card-savings" id="savingsCard">
+      <div class="card-top">
+        <div>
+          <h2>Savings</h2>
+          <p class="muted">Long-term progress</p>
+        </div>
+        <div class="amount-wrap">
+          <span class="currency">₱</span>
+          <span id="savingsAmount" class="amount-num">0.00</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="buttons-row">
+          <button class="btn primary" onclick="openModal('add','savings')">Add</button>
+          <button class="btn outline" onclick="openModal('deduct','savings')">Deduct</button>
+          <button class="btn accent" onclick="openModal('transfer','savings')">Transfer</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Current card -->
+    <section class="card card-current" id="currentCard">
+      <div class="card-top">
+        <div>
+          <h2>Current</h2>
+          <p class="muted">Bank / Wallet</p>
+        </div>
+        <div class="amount-wrap">
+          <span class="currency">₱</span>
+          <span id="currentAmount" class="amount-num">0.00</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="buttons-row">
+          <button class="btn primary" onclick="openModal('add','current')">Add</button>
+          <button class="btn outline" onclick="openModal('deduct','current')">Deduct</button>
+          <button class="btn accent" onclick="openModal('transfer','current')">Transfer</button>
+        </div>
+      </div>
+    </section>
+    
+    
+     <!-- Daily card -->
+    <section class="card card-daily" id="dailyCard">
+      <div class="card-top">
+        <div>
+          <h2>Daily</h2>
+          <p class="muted">Money for today</p>
+        </div>
+        <div class="amount-wrap">
+          <span class="currency">₱</span>
+          <span id="dailyAmount" class="amount-num">0.00</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="buttons-row">
+          <button class="btn primary" onclick="openModal('add','daily')">Add</button>
+          <button class="btn outline" onclick="openModal('deduct','daily')">Deduct</button>
+          <button class="btn accent" onclick="openModal('transfer','daily')">Transfer</button>
+        </div>
+      </div>
+    </section>
+    
+     <!-- End Day Button -->
+    <div class="endday-area">
+      <button id="endDayBtn" class="btn endday" onclick="endDay()">End Day</button>
+    </div>
+
+    <!-- History panel -->
+    <section class="history-card">
+      <div class="history-header">
+        <h3>Transaction History</h3>
+        <div class="history-toggle">
+          <button id="addBtn" class="small active" onclick="showHistory('add')">Add</button>
+          <button id="deductBtn" class="small" onclick="showHistory('deduct')">Deduct</button>
+          <button id="transferBtn" class="small" onclick="showHistory('transfer')">Transfer</button>
+        </div>
+      </div>
+      <div id="historyList" class="history-list" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modalBackdrop" class="modal-backdrop hidden" onclick="closeModal()">
+    <div class="modal" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
+      <h4 id="modalTitle">Action</h4>
+      <div class="modal-body">
+        <input id="modalAmount" type="number" min="0" step="0.01" placeholder="Amount" />
+        <input id="modalReason" type="text" placeholder="Reason (required for add/deduct, optional for transfer)" />
+        <div id="transferTargetDiv" class="hidden">
+          <select id="transferTarget">
+            <option value="">Select target wallet</option>
+            <option value="daily">Daily</option>
+            <option value="current">Current</option>
+            <option value="savings">Savings</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button class="btn outline" onclick="closeModal()">Cancel</button>
+          <button class="btn primary" id="modalConfirmBtn">Confirm</button>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
